@@ -1,3 +1,10 @@
+//
+//  MyChroma+API.swift
+//  MyChroma
+//
+//  Created by Hylas on 2024/10/2.
+//
+
 public extension MyChroma {
   func root() async throws -> MyChromaRootResponse {
     try await requestAPI(.root)
@@ -20,7 +27,7 @@ public extension MyChroma {
   }
 
   func createDatabase(_ data: MyChromaCreateDatabaseRequestData) async throws {
-    _ = try await requestAPI(.createDatabase(data: data), with: NoDataResponse.self)
+    _ = try await requestAPINoResp(.createDatabase(data: data))
   }
 
   func getDatabase(_ data: MyChromaGetDatabaseRequestData) async throws -> MyChromaGetDatabaseResponse {
@@ -28,7 +35,7 @@ public extension MyChroma {
   }
 
   func createTenant(_ data: MyChromaCreateTenantRequestData) async throws {
-    _ = try await requestAPI(.createTenant(data: data), with: NoDataResponse.self)
+    _ = try await requestAPINoResp(.createTenant(data: data))
   }
 
   func getTenant(_ data: MyChromaGetTenantRequestData) async throws -> MyChromaGetTenantResponse {
@@ -48,11 +55,11 @@ public extension MyChroma {
   }
 
   func add(_ data: MyChromaAddRequestData) async throws {
-    _ = try await requestAPI(.add(data: data), with: NoDataResponse.self)
+    _ = try await requestAPINoResp(.add(data: data))
   }
 
-  // func update(_ data: MyChromaUpdateRequestData) async throws -> MyChromaUpdateResponse {
-  //   try await requestAPI(.update(data: data))
+  // func update(_ data: MyChromaUpdateRequestData) async throws {
+  // try await requestAPI(.update(data: data))
   // }
 
   // func upsert(_ data: MyChromaUpsertRequestData) async throws -> MyChromaUpsertResponse {
@@ -62,7 +69,7 @@ public extension MyChroma {
   // func get(_ data: MyChromaGetRequestData) async throws -> MyChromaGetResponse {
   //   try await requestAPI(.get(data: data))
   // }
-
+  
   func delete(_ data: MyChromaDeleteRequestData) async throws -> MyChromaDeleteResponse {
     try await requestAPI(.delete(data: data))
   }
@@ -80,10 +87,10 @@ public extension MyChroma {
   }
 
   func deleteCollection(_ data: MyChromaDeleteCollectionRequestData) async throws {
-    _ = try await requestAPI(.deleteCollection(data: data), with: NoDataResponse.self)
+    _ = try await requestAPINoResp(.deleteCollection(data: data))
   }
 
   func updateCollection(_ data: MyChromaUpdateCollectionRequestData) async throws {
-    _ = try await requestAPI(.updateCollection(data: data), with: NoDataResponse.self)
+    _ = try await requestAPINoResp(.updateCollection(data: data))
   }
 }

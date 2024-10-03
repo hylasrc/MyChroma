@@ -2,6 +2,11 @@ import Foundation
 
 public typealias AnyParams = [String: AnyCodable]
 
+@usableFromInline
+internal let defaultTenant = "default_tenant"
+@usableFromInline
+internal let defaultDatabase = "default_database"
+
 protocol RequestPathVariables {
   func populate(_ rawUrl: String) -> String
 }

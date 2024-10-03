@@ -12,7 +12,7 @@ public struct MyChromaCreateDatabaseRequestData {
   internal var queries: Self.Query
   internal var body: Self.Body
 
-  public init(tenant: String, name: String) {
+  public init(tenant: String = defaultTenant, name: String) {
     path = .init()
     queries = .init(name: name)
     body = .init(tenant: tenant)
@@ -21,14 +21,14 @@ public struct MyChromaCreateDatabaseRequestData {
   internal struct Path: RequestPathVariables {}
 
   internal struct Query: RequestQueries {
-     var name: String
+    var name: String
 
-     func populate(_ url: URL) -> URL {
+    func populate(_ url: URL) -> URL {
       url.appending(queryItems: [.init(name: "name", value: name)])
     }
   }
 
   internal struct Body: Codable {
-     var tenant: String
+    var tenant: String
   }
 }

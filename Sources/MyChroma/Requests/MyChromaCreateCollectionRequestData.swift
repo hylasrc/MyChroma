@@ -12,7 +12,10 @@ public struct MyChromaCreateCollectionRequestData {
   internal var queries: Self.Query
   internal var body: Self.Body
 
-  public init(tenant: String, database: String, name: String, configuration: AnyParams, metadata: AnyParams, getOrCreate: Bool) {
+  public init(
+    tenant: String = defaultTenant, database: String = defaultDatabase,
+    name: String, configuration: AnyParams, metadata: AnyParams, getOrCreate: Bool = false)
+  {
     path = .init()
     queries = .init(tenant: tenant, database: database)
     body = .init(name: name, configuration: configuration, metadata: metadata, getOrCreate: getOrCreate)

@@ -10,7 +10,10 @@ public struct MyChromaGetRequestData {
   internal var queries: Self.Query
   internal var body: Self.Body
 
-  public init(collectionId: String, ids: [String], where: AnyParams, whereDocument: AnyParams, sort: String, limit: Int, offset: Int, include: [String]) {
+  public init(
+    collectionId: String, ids: [String], where: AnyParams, whereDocument: AnyParams,
+    sort: String, offset: Int = 0, limit: Int = 10, include: [Include] = Include.allCases)
+  {
     path = .init(collectionId: collectionId)
     queries = .init()
     body = .init(ids: ids, where: `where`, whereDocument: whereDocument, sort: sort, limit: limit, offset: offset, include: include)
@@ -33,6 +36,6 @@ public struct MyChromaGetRequestData {
     var sort: String
     var limit: Int
     var offset: Int
-    var include: [String]
+    var include: [Include]
   }
 }

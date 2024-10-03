@@ -12,7 +12,7 @@ public struct MyChromaGetDatabaseRequestData {
   internal var queries: Self.Query
   internal var body: Self.Body
 
-  public init(database: String, tenant: String) {
+  public init(tenant: String = defaultTenant, database: String = defaultDatabase) {
     path = .init(database: database)
     queries = .init(tenant: tenant)
     body = .init()

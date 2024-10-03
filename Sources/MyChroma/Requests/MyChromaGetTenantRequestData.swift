@@ -10,7 +10,7 @@ public struct MyChromaGetTenantRequestData {
   internal var queries: Self.Query
   internal var body: Self.Body
 
-  public init(tenant: String) {
+  public init(tenant: String = defaultTenant) {
     path = .init(tenant: tenant)
     queries = .init()
     body = .init()

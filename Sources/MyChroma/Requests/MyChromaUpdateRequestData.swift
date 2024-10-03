@@ -10,7 +10,10 @@ public struct MyChromaUpdateRequestData {
   internal var queries: Self.Query
   internal var body: Self.Body
 
-  public init(collectionId: String, embeddings: [String], metadatas: [AnyParams?], documents: [String?], uris: [String?], ids: [String]) {
+  public init(
+    collectionId: String, embeddings: [String], metadatas: [AnyParams],
+    documents: [String], uris: [String], ids: [String])
+  {
     path = .init(collectionId: collectionId)
     queries = .init()
     body = .init(embeddings: embeddings, metadatas: metadatas, documents: documents, uris: uris, ids: ids)
@@ -28,9 +31,9 @@ public struct MyChromaUpdateRequestData {
 
   internal struct Body: Codable {
     var embeddings: [String]
-    var metadatas: [AnyParams?]
-    var documents: [String?]
-    var uris: [String?]
+    var metadatas: [AnyParams]
+    var documents: [String]
+    var uris: [String]
     var ids: [String]
   }
 }

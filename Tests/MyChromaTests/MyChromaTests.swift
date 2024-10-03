@@ -12,7 +12,7 @@ func testMyChromaAPI() async {
     // try print(await chroma.count(.init(collectionId: id)))
     // try await print(chroma.countCollections(.init(tenant: "default_tenant", database: "default_database")))
     // try print(await chroma.getCollection(.init(collectionName: "testCollection", tenant: "default_tenant", database: "default_database")))
-    let collections = try await chroma.listCollections(.init(limit: 100, offset: 0, tenant: "default_tenant", database: "default_database"))
+    let collections = try await chroma.listCollections(.init(tenant: "default_tenant", database: "default_database", offset: 0, limit: 100))
     print(collections)
     try print(await chroma.updateCollection(.init(collectionId: collId, newName: "testCollection", newMetadata: ["1": "2"])))
     print("end")
