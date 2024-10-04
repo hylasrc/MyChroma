@@ -11,12 +11,21 @@ public struct MyChromaUpdateRequestData {
   internal var body: Self.Body
 
   public init(
-    collectionId: String, embeddings: [String], metadatas: [AnyParams],
-    documents: [String], uris: [String], ids: [String])
+    collectionId: String, ids: [String], embeddings: [Double],
+    metadatas: [AnyParams], documents: [String], uris: [String])
   {
     path = .init(collectionId: collectionId)
     queries = .init()
-    body = .init(embeddings: embeddings, metadatas: metadatas, documents: documents, uris: uris, ids: ids)
+    body = .init(ids: ids, embeddings: embeddings.asFloatArray(), metadatas: metadatas, documents: documents, uris: uris)
+  }
+
+  public init(
+    collectionId: String, ids: [String], embeddings: [Float],
+    metadatas: [AnyParams], documents: [String], uris: [String])
+  {
+    path = .init(collectionId: collectionId)
+    queries = .init()
+    body = .init(ids: ids, embeddings: embeddings, metadatas: metadatas, documents: documents, uris: uris)
   }
 
   internal struct Path: RequestPathVariables {
@@ -30,10 +39,10 @@ public struct MyChromaUpdateRequestData {
   internal struct Query: RequestQueries {}
 
   internal struct Body: Codable {
-    var embeddings: [String]
+    var ids: [String]
+    var embeddings: [Float]
     var metadatas: [AnyParams]
     var documents: [String]
     var uris: [String]
-    var ids: [String]
   }
 }

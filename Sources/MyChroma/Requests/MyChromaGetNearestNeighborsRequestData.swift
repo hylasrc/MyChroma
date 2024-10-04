@@ -4,6 +4,7 @@
 //
 //  Created by Hylas on 2024/10/3.
 //
+
 public enum Include: String, CaseIterable, Codable {
   case metadatas, documents, distances, embeddings
 }
@@ -14,12 +15,21 @@ public struct MyChromaGetNearestNeighborsRequestData {
   internal var body: Self.Body
 
   public init(
-    collectionId: String, where: AnyParams, whereDocument: AnyParams, queryEmbeddings: [String],
-    nResults: Int, include: [Include] = Include.allCases)
+    collectionId: String, queryEmbeddings: [Float], nResults: Int,
+    where: AnyParams, whereDocument: AnyParams, include: [Include] = Include.allCases)
   {
     path = .init(collectionId: collectionId)
     queries = .init()
     body = .init(where: `where`, whereDocument: whereDocument, queryEmbeddings: queryEmbeddings, nResults: nResults, include: include)
+  }
+
+  public init(
+    collectionId: String, queryEmbeddings: [Double], nResults: Int,
+    where: AnyParams, whereDocument: AnyParams, include: [Include] = Include.allCases)
+  {
+    path = .init(collectionId: collectionId)
+    queries = .init()
+    body = .init(where: `where`, whereDocument: whereDocument, queryEmbeddings: queryEmbeddings.asFloatArray(), nResults: nResults, include: include)
   }
 
   internal struct Path: RequestPathVariables {
@@ -35,7 +45,7 @@ public struct MyChromaGetNearestNeighborsRequestData {
   internal struct Body: Codable {
     var `where`: AnyParams
     var whereDocument: AnyParams
-    var queryEmbeddings: [String]
+    var queryEmbeddings: [Float]
     var nResults: Int
     var include: [Include]
   }
