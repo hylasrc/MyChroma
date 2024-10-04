@@ -6,20 +6,20 @@
 //
 
 public struct MyChromaGetRequestData {
-  internal var path: Self.Path
-  internal var queries: Self.Query
-  internal var body: Self.Body
+  var path: Self.Path
+  var queries: Self.Query
+  var body: Self.Body
 
   public init(
     collectionId: String, ids: [String], where: AnyParams, whereDocument: AnyParams,
-    sort: String, offset: Int = 0, limit: Int = 10, include: [Include] = Include.allCases)
-  {
+    sort: String, offset: Int = 0, limit: Int = 10, include: [Include] = Include.allCases
+  ) {
     path = .init(collectionId: collectionId)
     queries = .init()
     body = .init(ids: ids, where: `where`, whereDocument: whereDocument, sort: sort, limit: limit, offset: offset, include: include)
   }
 
-  internal struct Path: RequestPathVariables {
+  struct Path: RequestPathVariables {
     var collectionId: String
 
     func populate(_ rawUrl: String) -> String {
@@ -27,9 +27,9 @@ public struct MyChromaGetRequestData {
     }
   }
 
-  internal struct Query: RequestQueries {}
+  struct Query: RequestQueries {}
 
-  internal struct Body: Codable {
+  struct Body: Codable {
     var ids: [String]
     var `where`: AnyParams
     var whereDocument: AnyParams
@@ -37,5 +37,15 @@ public struct MyChromaGetRequestData {
     var limit: Int
     var offset: Int
     var include: [Include]
+
+    enum CodingKeys: String, CodingKey {
+      case ids
+      case `where`
+      case whereDocument = "where_document"
+      case sort
+      case limit
+      case offset
+      case include
+    }
   }
 }

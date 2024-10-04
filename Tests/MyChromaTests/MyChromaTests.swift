@@ -7,6 +7,7 @@ func testMyChromaAPI() async {
   var chroma = MyChroma("http://localhost:8000")
   let collId = "606c92ad-49bf-4616-ae48-f08d27041965"
   do {
+    
     // let id = collections.first!.id
     // try print(await chroma.createCollection(.init(tenant: "default_tenant", database: "default_database", name: "testCollection", configuration: [:], metadata: ["1": "2"], getOrCreate: false)))
     // try print(await chroma.count(.init(collectionId: id)))

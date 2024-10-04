@@ -30,5 +30,11 @@ public struct MyChromaDeleteRequestData {
     var ids: [String]
     var `where`: AnyParams
     var whereDocument: AnyParams
+    
+    enum CodingKeys: String, CodingKey {
+      case ids
+      case `where`
+      case whereDocument = "where_document"
+    }
   }
 }

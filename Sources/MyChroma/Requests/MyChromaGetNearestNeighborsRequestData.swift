@@ -48,5 +48,13 @@ public struct MyChromaGetNearestNeighborsRequestData {
     var queryEmbeddings: [Float]
     var nResults: Int
     var include: [Include]
+    
+    enum CodingKeys: String, CodingKey {
+      case `where`
+      case whereDocument = "where_document"
+      case queryEmbeddings = "query_embeddings"
+      case nResults = "n_results"
+      case include
+    }
   }
 }
