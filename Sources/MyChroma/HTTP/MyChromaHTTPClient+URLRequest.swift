@@ -16,6 +16,7 @@ extension MyChromaHTTPClient {
 
   func send<T: Decodable>(request: URLRequest, with responseType: T.Type) async throws -> T {
     let (data, response) = try await URLSession.shared.data(for: request)
+    // debugPrint(String(data: data, encoding: .utf8))
     try validate(data: data, response: response)
     return try decoder.decode(T.self, from: data)
   }

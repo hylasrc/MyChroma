@@ -9,13 +9,20 @@ public struct MyChromaAddRequestData {
   internal var path: Self.Path
   internal var queries: Self.Query
   internal var body: Self.Body
-  public init(collectionId: String, ids: [String], embeddings: [[Double]], metadatas: [AnyParams], documents: [String], uris: [String] = []) {
+
+  public init(
+    collectionId: String, ids: [String],
+    embeddings: [[Double]]? = nil, metadatas: [AnyParams]? = nil, documents: [String]? = nil, uris: [String]? = nil
+  ) {
     path = .init(collectionId: collectionId)
     queries = .init()
-    body = .init(ids: ids, embeddings: embeddings.asFloatArray(), metadatas: metadatas, documents: documents, uris: uris)
+    body = .init(ids: ids, embeddings: embeddings?.asFloatArray(), metadatas: metadatas, documents: documents, uris: uris)
   }
 
-  public init(collectionId: String, ids: [String], embeddings: [[Float]], metadatas: [AnyParams], documents: [String], uris: [String] = []) {
+  public init(
+    collectionId: String, ids: [String],
+    embeddings: [[Float]]? = nil, metadatas: [AnyParams]? = nil, documents: [String]? = nil, uris: [String]? = nil
+  ) {
     path = .init(collectionId: collectionId)
     queries = .init()
     body = .init(ids: ids, embeddings: embeddings, metadatas: metadatas, documents: documents, uris: uris)
@@ -33,9 +40,9 @@ public struct MyChromaAddRequestData {
 
   internal struct Body: Codable {
     public var ids: [String]
-    public var embeddings: [[Float]]
-    public var metadatas: [AnyParams]
-    public var documents: [String]
-    public var uris: [String]
+    public var embeddings: [[Float]]?
+    public var metadatas: [AnyParams]?
+    public var documents: [String]?
+    public var uris: [String]?
   }
 }

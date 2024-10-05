@@ -11,8 +11,8 @@ public struct MyChromaGetRequestData {
   var body: Self.Body
 
   public init(
-    collectionId: String, ids: [String], where: AnyParams, whereDocument: AnyParams,
-    sort: String, offset: Int = 0, limit: Int = 10, include: [Include] = Include.allCases
+    collectionId: String, ids: [String]? = nil, where: AnyParams? = nil, whereDocument: AnyParams? = nil,
+    sort: String? = nil, offset: Int? = nil, limit: Int? = nil, include: [Include] = [.metadatas, .documents, .embeddings]
   ) {
     path = .init(collectionId: collectionId)
     queries = .init()
@@ -30,12 +30,12 @@ public struct MyChromaGetRequestData {
   struct Query: RequestQueries {}
 
   struct Body: Codable {
-    var ids: [String]
-    var `where`: AnyParams
-    var whereDocument: AnyParams
-    var sort: String
-    var limit: Int
-    var offset: Int
+    var ids: [String]?
+    var `where`: AnyParams?
+    var whereDocument: AnyParams?
+    var sort: String?
+    var limit: Int?
+    var offset: Int?
     var include: [Include]
 
     enum CodingKeys: String, CodingKey {

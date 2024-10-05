@@ -11,7 +11,7 @@ public struct MyChromaUpdateRequestData {
   internal var body: Self.Body
 
   public init(
-    collectionId: String, ids: [String], embeddings: [Double],
+    collectionId: String, ids: [String], embeddings: [[Double]],
     metadatas: [AnyParams], documents: [String], uris: [String])
   {
     path = .init(collectionId: collectionId)
@@ -20,7 +20,7 @@ public struct MyChromaUpdateRequestData {
   }
 
   public init(
-    collectionId: String, ids: [String], embeddings: [Float],
+    collectionId: String, ids: [String], embeddings: [[Float]],
     metadatas: [AnyParams], documents: [String], uris: [String])
   {
     path = .init(collectionId: collectionId)
@@ -40,7 +40,7 @@ public struct MyChromaUpdateRequestData {
 
   internal struct Body: Codable {
     var ids: [String]
-    var embeddings: [Float]
+    var embeddings: [[Float]]
     var metadatas: [AnyParams]
     var documents: [String]
     var uris: [String]
