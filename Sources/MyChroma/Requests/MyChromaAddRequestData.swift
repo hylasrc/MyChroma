@@ -11,6 +11,20 @@ public struct MyChromaAddRequestData {
   internal var body: Self.Body
 
   public init(
+    collectionId: String, ids: String,
+    embeddings: [Double]? = nil, metadatas: AnyParams? = nil, documents: String? = nil, uris: String? = nil
+  ) {
+    var (e, m, d, u) = (nil, nil, nil, nil) as ([[Float]]?, [AnyParams]?, [String]?, [String]?)
+    if let embeddings { e = [embeddings.asFloatArray()] }
+    if let metadatas { m = [metadatas] }
+    if let documents { d = [documents] }
+    if let uris { u = [uris] }
+    path = .init(collectionId: collectionId)
+    queries = .init()
+    body = .init(ids: [ids], embeddings: e, metadatas: m, documents: d, uris: u)
+  }
+
+  public init(
     collectionId: String, ids: [String],
     embeddings: [[Double]]? = nil, metadatas: [AnyParams]? = nil, documents: [String]? = nil, uris: [String]? = nil
   ) {

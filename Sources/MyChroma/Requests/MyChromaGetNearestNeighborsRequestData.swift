@@ -11,8 +11,25 @@ public struct MyChromaGetNearestNeighborsRequestData {
   internal var body: Self.Body
 
   public init(
+    collectionId: String, queryEmbeddings: [Float], nResults: Int? = nil,
+    where: AnyParams? = nil, whereDocument: AnyParams? = nil, include: [MyChroma.Include] = [.metadatas, .documents, .distances])
+  {
+    path = .init(collectionId: collectionId)
+    queries = .init()
+    body = .init(queryEmbeddings: [queryEmbeddings], where: `where`, whereDocument: whereDocument, nResults: nResults, include: include)
+  }
+
+  public init(
+    collectionId: String, queryEmbeddings: [Double], nResults: Int? = nil,
+    where: AnyParams? = nil, whereDocument: AnyParams? = nil, include: [MyChroma.Include] = [.metadatas, .documents, .distances])
+  {
+    self.init(collectionId: collectionId, queryEmbeddings: queryEmbeddings.asFloatArray(),
+              nResults: nResults, where: whereDocument, whereDocument: whereDocument, include: include)
+  }
+
+  public init(
     collectionId: String, queryEmbeddings: [[Float]], nResults: Int? = nil,
-    where: AnyParams? = nil, whereDocument: AnyParams? = nil, include: [Include] = [.metadatas, .documents, .distances])
+    where: AnyParams? = nil, whereDocument: AnyParams? = nil, include: [MyChroma.Include] = [.metadatas, .documents, .distances])
   {
     path = .init(collectionId: collectionId)
     queries = .init()
@@ -21,11 +38,10 @@ public struct MyChromaGetNearestNeighborsRequestData {
 
   public init(
     collectionId: String, queryEmbeddings: [[Double]], nResults: Int? = nil,
-    where: AnyParams? = nil, whereDocument: AnyParams? = nil, include: [Include] = [.metadatas, .documents, .distances])
+    where: AnyParams? = nil, whereDocument: AnyParams? = nil, include: [MyChroma.Include] = [.metadatas, .documents, .distances])
   {
-    path = .init(collectionId: collectionId)
-    queries = .init()
-    body = .init(queryEmbeddings: queryEmbeddings.asFloatArray(), where: `where`, whereDocument: whereDocument, nResults: nResults, include: include)
+    self.init(collectionId: collectionId, queryEmbeddings: queryEmbeddings.asFloatArray(),
+              nResults: nResults, where: whereDocument, whereDocument: whereDocument, include: include)
   }
 
   internal struct Path: RequestPathVariables {
@@ -43,7 +59,7 @@ public struct MyChromaGetNearestNeighborsRequestData {
     var `where`: AnyParams?
     var whereDocument: AnyParams?
     var nResults: Int?
-    var include: [Include]
+    var include: [MyChroma.Include]
 
     enum CodingKeys: String, CodingKey {
       case `where`

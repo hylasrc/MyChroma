@@ -46,7 +46,7 @@ public extension MyChroma {
     try await requestAPI(.createCollections(data: data))
   }
 
-  func listCollections(_ data: MyChromaListCollectionsRequestData) async throws -> MyChromaListCollectionsResponse {
+  func listCollections(_ data: MyChromaListCollectionsRequestData = .init()) async throws -> MyChromaListCollectionsResponse {
     try await requestAPI(.listCollection(data: data))
   }
 
@@ -78,7 +78,7 @@ public extension MyChroma {
     try await requestAPI(.count(data: data))
   }
 
-  func getNearestNeighbors(_ data: MyChromaGetNearestNeighborsRequestData) async throws -> MyChromaQueryRequest {
+  func getNearestNeighbors(_ data: MyChromaGetNearestNeighborsRequestData) async throws -> MyChroma.QueryResult {
     try await requestAPI(.getNearestNeighbors(data: data))
   }
 
