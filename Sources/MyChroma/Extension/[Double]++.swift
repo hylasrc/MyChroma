@@ -2,7 +2,7 @@
 //  [Double]++.swift
 //  MyChroma
 //
-//  Created by Howie Young on 2024/10/4.
+//  Created by Hylas on 2024/10/4.
 //
 
 extension [Double] {

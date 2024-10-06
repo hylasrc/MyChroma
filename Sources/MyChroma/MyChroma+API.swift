@@ -66,9 +66,9 @@ public extension MyChroma {
   //   try await requestAPI(.upsert(data: data))
   // }
 
-  // func get(_ data: MyChromaGetRequestData) async throws -> MyChromaGetResponse {
-  //   try await requestAPI(.get(data: data))
-  // }
+  func get(_ data: MyChromaGetRequestData) async throws -> MyChromaGetResponse {
+    try await requestAPI(.get(data: data))
+  }
 
   func delete(_ data: MyChromaDeleteRequestData) async throws -> MyChromaDeleteResponse {
     try await requestAPI(.delete(data: data))

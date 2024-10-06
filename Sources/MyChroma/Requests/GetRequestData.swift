@@ -12,7 +12,7 @@ public struct MyChromaGetRequestData {
 
   public init(
     collectionId: String, ids: [String]? = nil, where: AnyParams? = nil, whereDocument: AnyParams? = nil,
-    sort: String? = nil, offset: Int? = nil, limit: Int? = nil, include: [MyChroma.Include] = [.metadatas, .documents, .embeddings]
+    sort: String? = nil, offset: Int? = nil, limit: Int? = 10, include: [MyChroma.Include] = [.metadatas, .documents, .embeddings]
   ) {
     path = .init(collectionId: collectionId)
     queries = .init()

@@ -7,7 +7,8 @@
 
 public extension MyChroma {
   enum Include: String, CaseIterable, Codable {
-    case metadatas, documents, distances, embeddings, uris, data
+    case metadatas, documents, distances, embeddings, uris
+    // ,data // TODO Image
   }
   
   struct QueryResult: Codable {

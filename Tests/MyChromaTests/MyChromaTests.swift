@@ -5,18 +5,20 @@ import Testing
 @Test
 func testMyChromaAPI() async {
   var chroma = MyChroma("http://localhost:8000")
-  let collId = "8d6bb4a0-de48-44b5-aafd-f5a6cda1f96b"
+  let collId = "d3340f3d-4fcd-4e79-b3bb-da2572a0bb20"
   do {
     // let docs = try? await chroma.similaritySearch(.init(collectionId: collId, queryEmbeddings: [xingyu], nResults: 100))
     // docs?.forEach { doc in
     //   print(doc.content)
     //   print(doc.metadata)
     // }
-    print(try? await chroma.getNearestNeighbors(.init(collectionId: collId, queryEmbeddings: [e], nResults: 100)))
+    try print(await chroma.get(.init(collectionId: collId, limit: 10, include: [.documents, .metadatas])))
+    // print(try? await chroma.getNearestNeighbors(.init(collectionId: collId, queryEmbeddings: [e], nResults: 100)))
     debugPrint("end")
   } catch {
     debugPrint(error.localizedDescription)
     if let error = error as? URLError {
+      print(error.code)
       debugPrint(error.userInfo)
     }
   }
