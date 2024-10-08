@@ -32,5 +32,5 @@ public struct MyChromaCountCollectionsRequestData {
     }
   }
 
-  internal struct Body: Codable {}
+  internal struct Body: Encodable {}
 }

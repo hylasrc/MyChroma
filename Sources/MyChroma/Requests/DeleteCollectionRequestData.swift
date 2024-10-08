@@ -38,5 +38,5 @@ public struct MyChromaDeleteCollectionRequestData {
     }
   }
 
-  internal struct Body: Codable {}
+  internal struct Body: Encodable {}
 }

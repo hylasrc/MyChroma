@@ -26,5 +26,5 @@ public struct MyChromaGetTenantRequestData {
 
   internal struct Query: RequestQueries {}
 
-  internal struct Body: Codable {}
+  internal struct Body: Encodable {}
 }

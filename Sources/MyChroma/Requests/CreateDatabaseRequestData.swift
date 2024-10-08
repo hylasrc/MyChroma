@@ -28,7 +28,7 @@ public struct MyChromaCreateDatabaseRequestData {
     }
   }
 
-  internal struct Body: Codable {
+  internal struct Body: Encodable {
     var tenant: String
   }
 }

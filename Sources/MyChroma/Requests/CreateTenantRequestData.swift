@@ -20,7 +20,7 @@ public struct MyChromaCreateTenantRequestData {
 
   internal struct Query: RequestQueries {}
 
-  internal struct Body: Codable {
+  internal struct Body: Encodable {
     var name: String
   }
 }

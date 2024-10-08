@@ -10,10 +10,14 @@ public struct MyChromaDeleteRequestData {
   internal var queries: Self.Query
   internal var body: Self.Body
 
-  public init(collectionId: String, ids: [String], where: AnyParams, whereDocument: AnyParams) {
+  public init(collectionId: String, ids: [String], where: [String: Encodable]?, whereDocument: [String: Encodable]?) {
     path = .init(collectionId: collectionId)
     queries = .init()
-    body = .init(ids: ids, where: `where`, whereDocument: whereDocument)
+    body = .init(ids: ids, where: AnyEncodable(`where`), whereDocument: AnyEncodable(whereDocument))
+  }
+
+  public init(collectionId: String, ids: [String], where: Where? = nil, whereDocument: WhereDocument? = nil) {
+    self.init(collectionId: collectionId, ids: ids, where: `where`?.build(), whereDocument: whereDocument?.build())
   }
 
   internal struct Path: RequestPathVariables {
@@ -26,11 +30,11 @@ public struct MyChromaDeleteRequestData {
 
   internal struct Query: RequestQueries {}
 
-  internal struct Body: Codable {
+  internal struct Body: Encodable {
     var ids: [String]
-    var `where`: AnyParams
-    var whereDocument: AnyParams
-    
+    var `where`: AnyEncodable?
+    var whereDocument: AnyEncodable?
+
     enum CodingKeys: String, CodingKey {
       case ids
       case `where`

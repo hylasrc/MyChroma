@@ -3,17 +3,42 @@ import Foundation
 import Testing
 
 @Test
+func testQuery() async throws {
+  let query = Where {
+    Or {
+      "score".gt(90).lt(100)
+      "grade".eq("A")
+      And {
+        "class".in([1, 2])
+        "firstName".eq("Yeung")
+      }
+    }
+  }
+  debugPrint(query.build())
+  let encoder = JSONEncoder()
+  let json = try! encoder.encode(AnyEncodable(query.build()))
+  debugPrint(String(data: json, encoding: .utf8)!)
+}
+
+@Test
 func testMyChromaAPI() async {
   var chroma = MyChroma("http://localhost:8000")
   let collId = "d3340f3d-4fcd-4e79-b3bb-da2572a0bb20"
   do {
-    // let docs = try? await chroma.similaritySearch(.init(collectionId: collId, queryEmbeddings: [xingyu], nResults: 100))
-    // docs?.forEach { doc in
-    //   print(doc.content)
-    //   print(doc.metadata)
-    // }
-    try print(await chroma.get(.init(collectionId: collId, limit: 10, include: [.documents, .metadatas])))
-    // print(try? await chroma.getNearestNeighbors(.init(collectionId: collId, queryEmbeddings: [e], nResults: 100)))
+    try print(await chroma.getNearestNeighbors(.init(
+      collectionId: collId, queryEmbeddings: [e],
+      nResults: 100,
+      where: .init {
+        "from".in("Howie Yeung")
+      },
+      whereDocument: .init {
+        And {
+          contains("1")
+          notContains("2")
+        }
+      },
+      include: [.documents, .embeddings]))
+    )
     debugPrint("end")
   } catch {
     debugPrint(error.localizedDescription)

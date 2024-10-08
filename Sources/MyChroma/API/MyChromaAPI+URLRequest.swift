@@ -11,7 +11,7 @@ extension MyChromaAPI {
   func asURLRequest(_ path: String = MyChromaAPI.defaultPath) -> URLRequest {
     let urlTemplate = "\(path)\(uri)"
 
-    let (rawUrl, queries, body): (String, RequestQueries?, Codable?) = switch self {
+    let (rawUrl, queries, body): (String, RequestQueries?, Encodable?) = switch self {
     case .root:
       (urlTemplate, nil, nil)
     case .reset:

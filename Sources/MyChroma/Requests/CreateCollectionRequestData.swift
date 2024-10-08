@@ -35,7 +35,7 @@ public struct MyChromaCreateCollectionRequestData {
     }
   }
 
-  internal struct Body: Codable {
+  internal struct Body: Encodable {
     var name: String
     var configuration: AnyParams
     var metadata: AnyParams

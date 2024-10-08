@@ -10,7 +10,7 @@ public extension MyChroma {
     case metadatas, documents, distances, embeddings, uris
     // ,data // TODO Image
   }
-  
+
   struct QueryResult: Codable {
     public let ids: [[String]]
     public let embeddings: [[[Float]]]?
@@ -21,15 +21,15 @@ public extension MyChroma {
     public let uris: [[String]]?
     // public let data: [[String]]? // TODO Image
   }
-  
+
   struct Document {
     public let id: String
     public var metadata: [String: AnyCodable]?
     public var content: String?
     public var embedding: [Float]?
-    
+
     // TODO: media
-    
+
     init(id: String) {
       self.id = id
       self.metadata = nil

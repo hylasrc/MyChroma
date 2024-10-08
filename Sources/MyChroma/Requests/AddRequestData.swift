@@ -52,7 +52,7 @@ public struct MyChromaAddRequestData {
 
   internal struct Query: RequestQueries {}
 
-  internal struct Body: Codable {
+  internal struct Body: Encodable {
     public var ids: [String]
     public var embeddings: [[Float]]?
     public var metadatas: [AnyParams]?

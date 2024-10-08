@@ -9,6 +9,7 @@ public struct MyChromaUpsertRequestData {
   internal var path: Self.Path
   internal var queries: Self.Query
   internal var body: Self.Body
+
   public init(
     collectionId: String, ids: [String], embeddings: [Double],
     metadatas: [AnyParams], documents: [String], uris: [String])
@@ -37,7 +38,7 @@ public struct MyChromaUpsertRequestData {
 
   internal struct Query: RequestQueries {}
 
-  internal struct Body: Codable {
+  internal struct Body: Encodable {
     var ids: [String]
     var embeddings: [Float]
     var metadatas: [AnyParams]

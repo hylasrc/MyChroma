@@ -11,12 +11,21 @@ public struct MyChromaGetRequestData {
   var body: Self.Body
 
   public init(
-    collectionId: String, ids: [String]? = nil, where: AnyParams? = nil, whereDocument: AnyParams? = nil,
+    collectionId: String, ids: [String]? = nil, where: [String: Encodable]?, whereDocument: [String: Encodable]?,
     sort: String? = nil, offset: Int? = nil, limit: Int? = 10, include: [MyChroma.Include] = [.metadatas, .documents, .embeddings]
   ) {
     path = .init(collectionId: collectionId)
     queries = .init()
-    body = .init(ids: ids, where: `where`, whereDocument: whereDocument, sort: sort, limit: limit, offset: offset, include: include)
+    body = .init(ids: ids, where: AnyEncodable(`where`), whereDocument: AnyEncodable(whereDocument),
+                 sort: sort, limit: limit, offset: offset, include: include)
+  }
+
+  public init(
+    collectionId: String, ids: [String]? = nil, where: Where? = nil, whereDocument: WhereDocument? = nil,
+    sort: String? = nil, offset: Int? = nil, limit: Int? = 10, include: [MyChroma.Include] = [.metadatas, .documents, .embeddings]
+  ) {
+    self.init(collectionId: collectionId, where: `where`?.build(), whereDocument: whereDocument?.build(),
+              sort: sort, offset: offset, limit: limit, include: include)
   }
 
   struct Path: RequestPathVariables {
@@ -29,10 +38,10 @@ public struct MyChromaGetRequestData {
 
   struct Query: RequestQueries {}
 
-  struct Body: Codable {
+  struct Body: Encodable {
     var ids: [String]?
-    var `where`: AnyParams?
-    var whereDocument: AnyParams?
+    var `where`: AnyEncodable?
+    var whereDocument: AnyEncodable?
     var sort: String?
     var limit: Int?
     var offset: Int?

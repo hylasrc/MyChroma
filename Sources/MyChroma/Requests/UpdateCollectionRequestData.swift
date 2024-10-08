@@ -26,7 +26,7 @@ public struct MyChromaUpdateCollectionRequestData {
 
   internal struct Query: RequestQueries {}
 
-  internal struct Body: Codable {
+  internal struct Body: Encodable {
     var newName: String
     var newMetadata: AnyParams
 
